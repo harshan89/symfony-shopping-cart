@@ -132,6 +132,9 @@
             $session = new Session();
             $cartItems = $session->get('cartItems');
             
+            if(!isset($cartItems))
+                return false;
+
             foreach($cartItems as $key => $cartItem)
             {
                 if($cartItem['book']->getId() == $id)
