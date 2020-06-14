@@ -17,6 +17,11 @@ http://symfony-shopping-cart.efiton.com/
 cd /var/www/
 git clone https://github.com/harshan89/symfony-shopping-cart.git
 
+/* Setup the database */
+Create mysql database and import book_store.sql file.
+Change the DATABASE_URL of the .env file
+DATABASE_URL=mysql://username:password@127.0.0.1:3306/book_store?serverVersion=5.7
+
 /* Install composer packages */
 cd symfony-shopping-cart
 composer install
