@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Cart</h1>
+        {% for flashMessage in app.session.flashbag.get('message') %}
+            <p class="text-center text-info"> {{ flashMessage }} </p>
+        {% endfor %}
+        {% if cartItems %}
+            <table class="table table-hover">
+                <tbody>
+                {% for cartItem in cartItems %}
+                    <tr>
+                        <td>{{ cartItem.book.name }}</td>
+                        <td><img src="{{ cartItem.book.thumb }}" style="height: 130px;" /></td>
+                        <td>{{ cartItem.book.price }}$</td>
+                        <td>{{ cartItem.book.author }}</td>
+                        <td>{{ cartItem.book.category.name }}</td>
+                        <td>
+                            <a href="{{ path('update_item_count', {'id': cartItem.book.id, 'action': 'decrease'}) }}" class="btn btn-outline-primary">-</a>
+                            <span class="badge badge-primary badge-pill">{{ cartItem.count }}</span>
+                            <a href="{{ path('update_item_count', {'id': cartItem.book.id, 'action': 'increase'}) }}" class="btn btn-outline-primary">+</a>
+                        </td>
+                        <td><a href="{{ path('remove_item_from_cart', {'id': cartItem.book.id}) }}"><button type="button" class="btn btn-outline-primary">Remove item</button></a></td>
+                    </tr>
+                {% endfor %}    
+                </tbody>
+            </table>
+            <hr />
+            <p class="text-right">
+                <a class="btn btn-outline-primary" href="{{ path('checkout') }}">Go to checkout</a>
+            </p>
+        {% else %}
+            <p class="text-center">Cart is empty</p>
+        {% endif %}
+    <div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center">Checkout</h1>
+        {% for flashMessage in app.session.flashbag.get('message') %}
+            <p class="text-center text-info"> {{ flashMessage }} </p>
+        {% endfor %}
+        {% if cartItems %}
+            <table class="table table-hover">
+                <tbody>
+                {% for cartItem in cartItems %}
+                    <tr>
+                        <td>{{ cartItem.book.name }}</td>
+                        <td><img src="{{ cartItem.book.thumb }}" style="height: 130px;" /></td>
+                        <td>{{ cartItem.book.author }}</td>
+                        <td>{{ cartItem.book.category.name }}</td>
+                        <td class="text-right">{{ cartItem.book.price }}$</td>
+                        <td class="text-right">{{ cartItem.count }}</td>
+                        <td class="text-right">{{ cartItem.count * cartItem.book.price }}$</td>
+                    </tr>
+                {% endfor %}  
+                    <tr>
+                        <td colspan="6" class="text-right font-weight-bold">Total bill</td>
+                        <td class="text-right font-weight-bold">{{ app.session.get('totalPrice') }}$</td>
+                    </tr>
+                {% if discounts %}    
+                    <tr>
+                        <td colspan="8" class="text-center font-weight-bold">Discounts</td>
+                    </tr>
+                    {% for key, discount in discounts %}
+                        <tr>
+                            <td colspan="6" class="text-right">{{ key|replace({
+                                'fivePlusChild': 'Buy 5 or more Children books 10% discount from the Children books', 
+                                'couponCodeDiscount': '15% discount for the total bill from the coupon code', 
+                                'tenBooksForEachCategory': 'Buy 10 books from each category you get 5% additional discount from the total bill'
+                                }) 
+                                }}</td>
+                            <td class="text-right">{{ discount }}$</td>
+                        </tr>
+                    {% endfor %} 
+                {% endif %}
+                <tr>
+                    <td colspan="6" class="text-right font-weight-bold">Net amount</td>
+                    <td class="text-right font-weight-bold">{{ app.session.get('displayPrice') }}$</td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="text-left">
+                <a class="btn btn-outline-primary" href="{{ path('cart') }}">Back to cart</a>
+                <a class="btn btn-outline-primary pull-right" href="{{ path('coupon_code') }}">Apply coupon code</a>
+            </p>
+        {% else %}
+            <p class="text-center">Empty</p>
+        {% endif %}
+    <div>
+{% endblock %}

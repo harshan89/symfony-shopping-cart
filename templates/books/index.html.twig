@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony Assignment{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br />
+        <div class="row">
+            {% if books %}
+                {% for book in books %}
+                    <div class="col-3">
+                        <div class="card" style="margin-bottom: 15px">
+                            <h5 class="card-header">{{ book.name }}</h5>
+                            <div class="card-body">
+                                <h6 class="card-title">{{ book.author }}</h6>
+                                <h6 class="card-subtitle text-muted">{{ book.category.name }}</h6>
+                            </div>
+                            <img style="height: 200px; width: 150px; margin: 0 auto;" src="{{ book.thumb }}" alt="Card image">
+                            <div class="card-body">
+                                <p style="height: 130px;">
+                                    {{ book.description|length > 100 ? book.description|slice(0, 100) ~ '...' : book.description }}
+                                </p>
+                            </div>
+                            <div class="card-body" style="padding-top: 0;">
+                                <p class="text-right">
+                                    <a href="#" class="card-link">{{ book.price }}$</a>
+                                    <a href="{{ path('add_item_to_cart', {'id': book.id}) }}"><button type="button" class="btn btn-outline-primary">Add to cart</button></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}    
+            {% else %}
+                <p>No books to display</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
