@@ -2,6 +2,8 @@
 
 ## [Click to go live demo](http://symfony-shopping-cart.efiton.com)
 
+<img src="https://i.imgur.com/WfWuW1F.jpg" alt="Demo images">
+
 ## Build/Run
 
 #### Requirements
