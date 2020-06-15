@@ -1,4 +1,4 @@
-# Symfony shopping cart
+<p align="center"><u>Create a book store application using Symfony framework</u></p>
 
 ## [Click to go live demo](http://symfony-shopping-cart.efiton.com)
 
