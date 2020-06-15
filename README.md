@@ -1,8 +1,6 @@
 # Symfony shopping cart
 
-## Live Demo
-
-http://symfony-shopping-cart.efiton.com/
+## [Click to go live demo](http://symfony-shopping-cart.efiton.com)
 
 ## Build/Run
 
@@ -50,4 +48,36 @@ server
         fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
     }
 }
+```
+
+## Server setup (Apache)
+
+```xml
+<VirtualHost *:80>
+	ServerName symfony-shopping-cart.efiton.com
+	DocumentRoot "/var/www/symfony-shopping-cart/public"
+	<Directory  "/var/www/symfony-shopping-cart/public">
+		Options +Indexes +Includes +FollowSymLinks +MultiViews
+		AllowOverride All
+		Require local
+	</Directory>
+</VirtualHost>
+```
+
+```javascript
+Restart your server
+
+Nginx
+sudo service nginx restart
+sudo service nginx status
+
+Apache
+sudo service apache2 restart
+sudo service apache2 status
+```
+
+### ⛵ Congratulations!
+
+```text
+ If you have any problem with installation text me harshanweb@gmail.com
 ```
